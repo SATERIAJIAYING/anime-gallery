@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AniGallery · 我的动漫收藏馆</title>
+  <meta name="description" content="一个动漫风格的图片画廊,以及由 Bangumi 数据驱动的动画推荐角。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api.bgm.tv" />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="petals" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-icon">🌸</span>
+      <span class="brand-text">Ani<span class="grad">Gallery</span></span>
+      <span class="brand-jp">アニメギャラリー</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#gallery">画廊 <span class="jp">Gallery</span></a>
+      <a href="#recs">我的推荐 <span class="jp">Recommend</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="hero-eyebrow">✦ セカイのコレクション ✦</p>
+      <h1 class="hero-title">
+        每一帧,<br />都是心动的<span class="grad">瞬间</span>
+      </h1>
+      <p class="hero-sub">
+        这里是我的动漫收藏馆。<br />喜欢的图,和想安利给你的番。
+      </p>
+      <div class="hero-stats">
+        <span class="stat"><b id="stat-count">—</b> 张收藏</span>
+        <span class="dot">·</span>
+        <span class="stat"><b id="stat-recs">—</b> 部推荐</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#gallery">🌸 逛逛画廊</a>
+        <a class="btn btn-ghost" href="#recs">🎬 看看推荐</a>
+      </div>
+      <div class="hero-deco jp-v">ギャラリー</div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Gallery · 画廊</p>
+          <h2 class="section-title">私のコレクション</h2>
+        </div>
+        <p class="section-desc">点击任意图片可全屏欣赏。</p>
+      </div>
+      <div class="filters" id="gallery-filters" role="tablist" aria-label="画廊标签筛选"></div>
+      <div class="masonry" id="gallery-grid"></div>
+      <p class="empty" id="gallery-empty" hidden>这个标签下还没有收藏呢 ~</p>
+    </section>
+
+    <section id="recs" class="section">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Recommend · 安利</p>
+          <h2 class="section-title">私が好きなアニメ</h2>
+        </div>
+        <p class="section-desc">数据来自 <a class="link" href="https://bangumi.tv" target="_blank" rel="noopener">Bangumi 番组计划</a>,评分与简介实时拉取;离线时自动使用内置快照。</p>
+      </div>
+
+      <div class="rec-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input id="rec-search" type="text" placeholder="搜索动画,添加到你喜欢的清单…(如:摇曳露营)" autocomplete="off" />
+          <button id="rec-search-btn" class="btn btn-primary btn-sm">搜索</button>
+        </div>
+        <div class="filters" id="rec-filters" role="tablist" aria-label="推荐年代筛选"></div>
+        <span class="live-status" id="live-status" title="Bangumi API 连接状态">○ 连接中…</span>
+      </div>
+      <div class="search-results" id="search-results" hidden></div>
+
+      <div class="rec-grid" id="rec-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>🌸 AniGallery · by Bangumi × Me — 用 <a class="link" href="https://bangumi.github.io/api/" target="_blank" rel="noopener">Bangumi API</a> 搭建 · 图片来自个人收藏 · 喜欢请去 <a class="link" href="https://bgm.tv" target="_blank" rel="noopener">bgm.tv</a> 支持原作</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" id="lb-close" aria-label="关闭">✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="上一张">‹</button>
+    <figure class="lb-figure">
+      <img id="lb-img" alt="" />
+      <figcaption class="lb-caption">
+        <span id="lb-title"></span>
+        <span id="lb-tags" class="lb-tags"></span>
+        <span id="lb-counter"></span>
+      </figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="下一张">›</button>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
