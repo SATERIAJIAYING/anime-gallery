@@ -1,5 +1,9 @@
 # 🌸 AniGallery · 我的动漫收藏馆
 
+🌐 **在线访问:<https://sateriajiaying.github.io/anime-gallery/>**
+
+(隔壁还有我的番剧推荐:<https://sateriajiaying.github.io/anime-pick/>)
+
 一个动漫风格的静态画廊网页,专为 **GitHub Pages** 设计:
 
 - **画廊**:84 张个人收藏图片的瀑布流展示,支持标签筛选、全屏灯箱(方向键 / ESC 操作)
