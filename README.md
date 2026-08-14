@@ -42,8 +42,25 @@ python3 -m http.server 8000
 
 ## 自定义
 
-- **改推荐种子**:编辑 `seeds.json`(字段含 `id`(bgm.tv 条目 ID)、`name`、`name_cn`、`date`、`score`、`rank`、`platform`、`summary`、`cover`、`tags`),然后运行 `python3 scripts/gen_data.py` 重新生成 `js/data.js`。
-- **换图片**:把新图放入 `assets/gallery/`,按现有格式在 `js/data.js` 的 `window.GALLERY` 里追加条目(`file` / `title` / `tags`)。
+### 修改推荐清单(推荐)
+
+用 `scripts/manage_seeds.py` 按 **bgm.tv 条目 ID** 增删:
+
+```sh
+python3 scripts/manage_seeds.py list                    # 查看当前推荐
+python3 scripts/manage_seeds.py add 400602 328609       # 添加(可多个 ID)
+python3 scripts/manage_seeds.py remove 400602           # 移除
+```
+
+- **ID 怎么找**:在 [bgm.tv](https://bgm.tv) 搜索动画 → 打开条目页 → 网址 `https://bgm.tv/subject/<数字>` 里的数字就是 ID。
+- 脚本会自动从 Bangumi API 拉取标题/评分/封面/简介,写入 `seeds.json`,并重新生成 `js/data.js`。
+- 需要能访问 api.bgm.tv(国内开代理即可,脚本自动使用系统代理)。
+- 手改也可以:编辑 `seeds.json`(字段含 `id`、`name`、`name_cn`、`date`、`score`、`rank`、`platform`、`summary`、`cover`、`tags`),然后运行 `python3 scripts/gen_data.py`。
+- 注意:页面加载时会按 `id` 实时刷新评分/简介/封面,所以 `seeds.json` 里的这些字段只是离线兜底,**真正决定显示哪部番的是 `id`**。
+
+### 换图片
+
+- 把新图放入 `assets/gallery/`,按现有格式在 `js/data.js` 的 `window.GALLERY` 里追加条目(`file` / `title` / `tags`)。
 - **年份划分**:「新番/老番」按 2020 年为界,可在 `js/app.js` 的 `isNew()` 里调整。
 
 ## 关于 Bangumi API
